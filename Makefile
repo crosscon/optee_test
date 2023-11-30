@@ -7,6 +7,7 @@ ifeq ($(out-dir),)
 $(error invalid output directory (O=$(O)))
 endif
 endif
+$(info out dir is $(out-dir))
 
 bindir ?= /bin
 libdir ?= /lib

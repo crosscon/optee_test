@@ -513,3 +513,140 @@ static void xtest_teec_TEE(ADBG_Case_t *c)
 
 ADBG_CASE_DEFINE(regression, 5006, xtest_teec_TEE,
 		"Tests for Global platform TEEC");
+
+
+static void xtest_CloseSession_null(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    CloseSession_null(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5007, xtest_CloseSession_null,
+	"xtest_CloseSession_null");
+
+static void xtest_Allocate_In(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    Allocate_In(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5008, xtest_Allocate_In, 
+	"Allocate_In");
+
+static void xtest_Allocate_out_of_memory(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    Allocate_out_of_memory(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5009, xtest_Allocate_out_of_memory,
+	"Allocate_out_of_memory");
+
+static void xtest_OpenSession_error_notExistingTA(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    OpenSession_error_notExistingTA(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5010, xtest_OpenSession_error_notExistingTA,
+	"OpenSession_error_notExistingTA");
+
+static void xtest_Allocate_InOut(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    Allocate_InOut(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5011, xtest_Allocate_InOut,
+	"Allocate_InOut");
+
+static void xtest_Register_In(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    Register_In(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5012, xtest_Register_In,
+	"Register_In");
+
+static void xtest_Register_notZeroLength_Out(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    Register_notZeroLength_Out(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5013, xtest_Register_notZeroLength_Out,
+ "Register_notZeroLength_Out");
+
+static void xtest_Register_InOut(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    Register_InOut(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5014, xtest_Register_InOut,
+ "Register_InOut");
+
+static void xtest_Register_zeroLength_Out(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    Register_zeroLength_Out(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5015, xtest_Register_zeroLength_Out,
+ "Register_zeroLength_Out");
+
+static void xtest_Allocate_Out(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    Allocate_Out(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5016, xtest_Allocate_Out,
+ "Allocate_Out");
+
+static void xtest_FinalizeContext_null(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    FinalizeContext_null(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5017, xtest_FinalizeContext_null,
+ "FinalizeContext_null");
+
+static void xtest_InitializeContext_NotExistingTEE(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    InitializeContext_NotExistingTEE(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5018, xtest_InitializeContext_NotExistingTEE,
+ "InitializeContext_NotExistingTEE");
+
+static void xtest_AllocateThenRegister_SameMemory(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    AllocateThenRegister_SameMemory(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5019, xtest_AllocateThenRegister_SameMemory,
+ "AllocateThenRegister_SameMemory");
+
+static void xtest_AllocateSameMemory_twice(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    AllocateSameMemory_twice(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5020, xtest_AllocateSameMemory_twice,
+ "AllocateSameMemory_twice");
+
+static void xtest_RegisterSameMemory_twice(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    RegisterSameMemory_twice(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5021, xtest_RegisterSameMemory_twice,
+ "RegisterSameMemory_twice");
+
+static void xtest_Allocate_sharedMemory_32k(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    Allocate_sharedMemory_32k(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5022, xtest_Allocate_sharedMemory_32k,
+ "Allocate_sharedMemory_32k");
+
+static void xtest_Register_sharedMemory_32k(ADBG_Case_t *c)
+{
+    struct xtest_session connection = {c};
+    Register_sharedMemory_32k(&connection);
+}
+ADBG_CASE_DEFINE(regression, 5023, xtest_Register_sharedMemory_32k,
+ "Register_sharedMemory_32k");

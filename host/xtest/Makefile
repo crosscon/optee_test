@@ -33,6 +33,7 @@ define cc-bits
 $(if $(filter arm, $(1)),32,$(if $(filter aarch64, $(1)),64,unknown-arch))
 endef
 
+################################# Arm
 # OpenSSL is used by:
 # - GP tests series 8500
 # - Mbed TLS test 8103
@@ -42,18 +43,36 @@ ifeq ($(WITH_OPENSSL),y)
 CFLAGS += -DOPENSSL_FOUND=1
 ifneq ($(OPTEE_OPENSSL_EXPORT),)
 LDFLAGS += -lcrypto
-OPTEE_OPENSSL_EXPORT=~/PhD/Research/anytee/misc/openssl/include/
+OPTEE_OPENSSL_EXPORT=../openssl/include/
 CFLAGS += -I$(OPTEE_OPENSSL_EXPORT)
 else #OPTEE_OPENSSL_EXPORT
-CFLAGS += -I/home/david/PhD/Research/anytee/misc/openssl/include/
-# ifeq ($(call cc-bits, $(call cc-arch, $(CC))),32)
-# LDFLAGS += ../openssl/lib/arm/libcrypto.a -ldl
-# else
-# LDFLAGS += ../openssl/lib/aarch64/libcrypto.a -ldl
-# endif
-LDFLAGS += ../openssl/lib/riscv64/libcrypto.a -ldl
+CFLAGS += -I../openssl/include/
+
+ifeq ($(call cc-bits, $(call cc-arch, $(CC))),32)
+LDFLAGS += ../openssl/lib/arm/libcrypto.a -ldl
+else
+LDFLAGS += ../openssl/lib/aarch64/libcrypto.a -ldl
+endif
 endif #OPTEE_OPENSSL_EXPORT
 endif #require OpenSSL
+
+################################# RISCV 
+# OpenSSL is used by:
+# - GP tests series 8500
+# - Mbed TLS test 8103
+# - User/group login tests 1027 and 1028
+# WITH_OPENSSL ?= y
+# ifeq ($(WITH_OPENSSL),y)
+# CFLAGS += -DOPENSSL_FOUND=1
+# ifneq ($(OPTEE_OPENSSL_EXPORT),)
+# LDFLAGS += -lcrypto
+# OPTEE_OPENSSL_EXPORT=~/PhD/Research/anytee/misc/openssl/include/
+# CFLAGS += -I$(OPTEE_OPENSSL_EXPORT)
+# else #OPTEE_OPENSSL_EXPORT
+# CFLAGS += -I/home/david/PhD/Research/anytee/misc/openssl/include/
+# LDFLAGS += ../openssl/lib/riscv64/libcrypto.a -ldl
+# endif #OPTEE_OPENSSL_EXPORT
+# endif #require OpenSSL
 
 srcs := regression_1000.c
 

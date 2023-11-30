@@ -112,4 +112,48 @@ void xtest_barrier_init(pthread_barrier_t *barrier, unsigned count);
 void xtest_barrier_destroy(pthread_barrier_t *barrier);
 int xtest_barrier_wait(pthread_barrier_t *barrier);
 
+#include <linux/pmu.h>
+#include <linux/perf_event.h>
+//#include <trace/perf.h>
+#include <sched.h>
+#include <sys/ioctl.h>
+#include <asm/unistd.h>
+#include <unistd.h>
+
+struct timespec timer_start(void);
+unsigned long long int timer_end(struct timespec start_time);
+
+
+int setup_counters(void);
+
+void stop_counters(int inst_fd);
+//TEEC_Dummy(&xtest_teec_ctx, &data_for_dummy);
+//memset(&data_for_dummy, 0, sizeof(TEEC_Dummy_data));
+//
+
+extern char results_filename[100];
+
+#define INIT_COUNTING(test, description)					\
+    FILE *fd;									\
+    struct timespec tick;							\
+    unsigned long long int elapsed;						\
+										\
+    sprintf(results_filename, "%s.txt",  test);			\
+    if(access(results_filename, F_OK) != 0){					\
+	fd = fopen(results_filename, "w");					\
+	fprintf(fd, "%s\n", description);		\
+    }else{									\
+	fd = fopen(results_filename, "a");					\
+    }										\
+skipstart:									\
+    tick = timer_start();							\
+
+#define END_COUNTING()								\
+    elapsed = timer_end(tick);							\
+    fprintf(fd, "%lld\n",elapsed);						\
+										\
+    fclose(fd);									\
+skipend:									
+
+
 #endif /*XTEST_HELPERS_H*/

@@ -487,3 +487,20 @@ int xtest_barrier_wait(pthread_barrier_t *barrier)
 		errx(1, "pthread _barrier_wait: %s", strerror(e));
 	return e;
 }
+
+#include <time.h>
+char results_filename[100];
+// call this function to start a nanosecond-resolution timer
+struct timespec timer_start(void){
+    struct timespec start_time;
+    clock_gettime(CLOCK_REALTIME, &start_time);
+    return start_time;
+}
+
+// call this function to end a timer, returning nanoseconds elapsed as a long
+unsigned long long int timer_end(struct timespec start_time){
+    struct timespec end_time;
+    clock_gettime(CLOCK_REALTIME, &end_time);
+    long diffInNanos = (end_time.tv_sec - start_time.tv_sec) * (long)1e9 + (end_time.tv_nsec - start_time.tv_nsec);
+    return diffInNanos;
+}

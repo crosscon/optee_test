@@ -7,6 +7,7 @@
  * 1. Includes
  ************************************************************************/
 #include "adbg_int.h"
+#include <xtest_helpers.h>
 
 /*************************************************************************
  * 2. Definition of external constants and variables
@@ -157,7 +158,9 @@ static int ADBG_RunSuite(
 		/* Start the parent test case */
 		Do_ADBG_BeginSubCase(Case_p, "%s", case_def->Title_p);
 
+		INIT_COUNTING(case_def->TestID_p, case_def->Title_p);
 		case_def->Run_fp(Case_p);
+		END_COUNTING();
 
 		/* End abondoned subcases */
 		while (Case_p->CurrentSubCase_p != Case_p->FirstSubCase_p)
