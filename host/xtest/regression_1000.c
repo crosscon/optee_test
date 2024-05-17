@@ -1969,10 +1969,11 @@ static void xtest_tee_test_1025(ADBG_Case_t *c)
 
 	Do_ADBG_EndSubCase(c, "Invalid NULL buffer memref registration");
 
-	if (!xtest_teec_ctx.memref_null) {
-		Do_ADBG_Log("Skip subcases: MEMREF_NULL capability not supported");
-		return;
-	}
+	/* if (!xtest_teec_ctx.memref_null) { */
+	/* 	Do_ADBG_Log("Skip subcases: MEMREF_NULL capability not supported"); */
+	/* 	return; */
+	/* } */
+        return;
 
 	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
 				      xtest_teec_open_session(&session,

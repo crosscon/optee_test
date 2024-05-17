@@ -83,7 +83,7 @@ install:
 	$(q)find $(out-dir) -name \*.ta -exec cp {} ${DESTDIR}${libdir}/optee_armtz \;
 	$(echo) '  INSTALL ${DESTDIR}${bindir}'
 	$(q)mkdir -p ${DESTDIR}${bindir}
-	$(q)cp $(out-dir)/xtest/xtest ${DESTDIR}${bindir}
+	$(q)cp $(out-dir)/xtest/xtest* ${DESTDIR}${bindir}
 	$(echo) '  INSTALL ${DESTDIR}/$(CFG_TEE_PLUGIN_LOAD_PATH)'
 	$(q)mkdir -p ${DESTDIR}/$(CFG_TEE_PLUGIN_LOAD_PATH)
 	$(q)cp $(out-dir)/supp_plugin/*.plugin ${DESTDIR}/$(CFG_TEE_PLUGIN_LOAD_PATH)
